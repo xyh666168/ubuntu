@@ -1,0 +1,1 @@
+libasan4:arm64 libboost-system1.65.1:arm64 libboost-filesystem1.65.1:arm64 libssl-dev:arm64 device-tree-compiler:arm64 gstreamer1.0-tools cheese:arm64 unzip onboard wput lftp bluez bluez-tools
