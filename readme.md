@@ -5,7 +5,7 @@ for rockchip platform.
 
 ## Available Distro
 
-* Debian 9 (Stretch-X11)
+* ubuntu 18.04 9 (Bionic-X11)
 
 ```
 sudo apt-get install binfmt-support qemu-user-static
