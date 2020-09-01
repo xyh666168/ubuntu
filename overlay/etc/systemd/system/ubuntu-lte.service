@@ -1,0 +1,10 @@
+#start
+[Unit]
+Description=Setup ubuntu platform environment of 4g
+
+[Service]
+Type=simple
+ExecStart=/etc/init.d/ubuntu-lte.sh
+
+#end
+

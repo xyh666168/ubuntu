@@ -89,7 +89,6 @@ apt-get install -y gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-als
 
 dpkg -i  /packages/mpp/*
 dpkg -i  /packages/gst-rkmpp/*.deb
-dpkg -i  /packages/gst-base/*.deb
 apt-mark hold gstreamer1.0-x
 apt-get install -f -y
 
@@ -105,31 +104,37 @@ fi
 dpkg -i /packages/v4l-utils/libv4l*.deb
 dpkg -i /packages/v4l-utils/v4l-utils_1.14.2-1rockchip_arm64.deb
 dpkg -i /packages/libv4l-rkmpp/*.deb
+apt-get install -f -y
 
-apt-get install -y libxcb-randr0 libxcb-util0
 dpkg -i /packages/xserver/*.deb
+apt-get install -f -y
 
 dpkg -i /packages/others/ffmpeg-4.0/*.deb
+apt-get install -f -y
 
 #------------------libdrm------------
 dpkg -i  /packages/libdrm/*.deb
-apt-get install -f -
+apt-get install -f -y
 
 #---------kmssink---------
 dpkg -i  /packages/gst-bad/*.deb
 apt-get install -f -y
 
 dpkg -i /packages/glmark2/*.deb
-
-dpkg -i /packages/zint/*.deb
-
-dpkg -i /packages/scpl/*.deb
-dpkg -i /packages/chromium-browser-av/*.deb
-#---------MPV---------
-dpkg -i  /packages/mpv/*.deb
 apt-get install -f -y
 
-#dpkg -i /packages/chromium-browser-av/*.deb
+dpkg -i /packages/zint/*.deb
+apt-get install -f -y
+
+dpkg -i /packages/scpl/*.deb
+apt-get install -f -y
+
+dpkg -i /packages/chromium-browser-av/*.deb
+apt-get install -f -y
+
+#---------MPV---------
+#dpkg -i  /packages/mpv/*.deb
+#apt-get install -f -y
 
 # mark package to hold
 apt-mark hold libv4l-0 libv4l2rds0 libv4lconvert0 libv4l-dev v4l-utils
