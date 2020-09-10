@@ -23,13 +23,6 @@ echo -e "\033[36m Copy overlay to rootfs \033[0m"
 sudo mkdir -p $TARGET_ROOTFS_DIR/packages
 sudo cp -rf packages/$ARCH/* $TARGET_ROOTFS_DIR/packages
 
-cd $TARGET_ROOTFS_DIR/packages
-#find -name "*-dbgsym*" | xargs sudo rm -f
-#find -name "*-dev*" | xargs sudo rm -f
-cd -
-sudo cp -f packages/$ARCH/v4l-utils/libv4l-dev_1.14.2-1rockchip_arm64.deb $TARGET_ROOTFS_DIR/packages/v4l-utils/
-
-
 # overlay folder
 sudo cp -rf overlay/* $TARGET_ROOTFS_DIR/
 if [ "$ARCH" == "arm64"  ]; then
@@ -39,9 +32,6 @@ fi
 
 # version
 echo -e "\033[36m Add version string to rootfs \033[0m"
-#build_version="Ubuntu Software Version: RK3399_BOX_Ubuntu_`date +%Y%m%d.%H%M%S`"
-#echo $build_version > .version
-#sudo sed -i "s/<h1>Ubuntu Software Version: To Be Added<\/h1>/<h1>$build_version<\/h1>/g" ./binary/usr/share/xubuntu-docs/index.html
 echo "`date +%Y%m%d.%H%M%S`" > /tmp/firmware-release-version
 sudo cp /tmp/firmware-release-version ./binary/etc/ubuntu-release
 
@@ -76,16 +66,17 @@ sudo cp /usr/bin/qemu-aarch64-static $TARGET_ROOTFS_DIR/usr/bin/
 cat <<EOF | sudo chroot $TARGET_ROOTFS_DIR
 
 apt-get update
+apt-get install -y dpkg-dev git
+apt-get install -f -y
 
 chmod +x /etc/rc.local
-mkdir -p /media/sd0 /media/sd1 /media/sd2 /media/sd3 /media/sd4 /media/sd5 /media/sd6 /media/sd7
-ln -s sd0 /media/sd
 
 #---------------Rga--------------
 dpkg -i /packages/rga/*.deb
 
 echo -e "\033[36m Setup Video.................... \033[0m"
 apt-get install -y gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-alsa gstreamer1.0-plugins-base-apps
+apt-get install -f -y
 
 dpkg -i  /packages/mpp/*
 dpkg -i  /packages/gst-rkmpp/*.deb
@@ -101,40 +92,13 @@ elif [ "$ARCH" == "arm64" ]; then
        cp /packages/others/camera/libv4l-mplane.so /usr/lib/aarch64-linux-gnu/libv4l/plugins/
 fi
 
-dpkg -i /packages/v4l-utils/libv4l*.deb
-dpkg -i /packages/v4l-utils/v4l-utils_1.14.2-1rockchip_arm64.deb
-dpkg -i /packages/libv4l-rkmpp/*.deb
-apt-get install -f -y
-
 dpkg -i /packages/xserver/*.deb
-apt-get install -f -y
-
-dpkg -i /packages/others/ffmpeg-4.0/*.deb
 apt-get install -f -y
 
 #------------------libdrm------------
 dpkg -i  /packages/libdrm/*.deb
 apt-get install -f -y
 
-#---------kmssink---------
-dpkg -i  /packages/gst-bad/*.deb
-apt-get install -f -y
-
-dpkg -i /packages/glmark2/*.deb
-apt-get install -f -y
-
-dpkg -i /packages/zint/*.deb
-apt-get install -f -y
-
-dpkg -i /packages/scpl/*.deb
-apt-get install -f -y
-
-dpkg -i /packages/chromium-browser-av/*.deb
-apt-get install -f -y
-
-#---------MPV---------
-#dpkg -i  /packages/mpv/*.deb
-#apt-get install -f -y
 
 # mark package to hold
 apt-mark hold libv4l-0 libv4l2rds0 libv4lconvert0 libv4l-dev v4l-utils
