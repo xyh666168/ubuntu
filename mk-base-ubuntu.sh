@@ -15,6 +15,7 @@ if [ ! -d $TARGET_ROOTFS_DIR ] ; then
     sudo tar -xzvf ubuntu-base-18.04-base-arm64.tar.gz -C $TARGET_ROOTFS_DIR/
     sudo cp -b /etc/resolv.conf $TARGET_ROOTFS_DIR/etc/resolv.conf
     sudo cp -a /usr/bin/qemu-aarch64-static $TARGET_ROOTFS_DIR/usr/bin/
+    sudo cp -b sources.list $TARGET_ROOTFS_DIR/etc/apt/sources.list
 
 fi
 
@@ -31,13 +32,11 @@ echo "\033[36m Change root.....................\033[0m"
 
 cat <<EOF | sudo chroot $TARGET_ROOTFS_DIR/
 
-sed -i -e 's,^# deb\(.*\)$,deb\1,g' /etc/apt/sources.list
+apt-get -y update
+apt-get -f -y upgrade
 
-apt -y update
-apt -y upgrade
-
-apt-get -y remove blueman xfce4*
-apt-get -y install apt-utils vim git net-tools ubuntu-advantage-tools onboard glmark2-es2 xubuntu-core
+apt-get -f -y remove blueman xfce4*
+apt-get -f -y install apt-utils inetutils-ping vim git net-tools ubuntu-advantage-tools onboard glmark2-es2 xubuntu-core
 
 HOST=ubuntu-box
 

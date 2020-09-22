@@ -15,6 +15,7 @@ rk_wifi_init /dev/ttyS0
 # HACK: Prevent blueman from changing rfkill states
 rm /dev/rfkill
 
+dhclient eth0
 # Generate the SSH keys if non-existent
 ssh-keygen -A
 

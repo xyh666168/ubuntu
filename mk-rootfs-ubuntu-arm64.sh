@@ -94,6 +94,15 @@ fi
 
 dpkg -i /packages/xserver/*.deb
 apt-get install -f -y
+apt-mark hold xserver-common xserver-xorg-core xserver-xorg-legacy
+
+#------------------ffmpeg------------
+dpkg -i  /packages/ffmpeg/*.deb
+apt-get install -f -y
+
+#------------------mpv------------
+dpkg -i  /packages/mpv/*.deb
+apt-get install -f -y
 
 #------------------libdrm------------
 dpkg -i  /packages/libdrm/*.deb
@@ -101,9 +110,9 @@ apt-get install -f -y
 
 
 # mark package to hold
-apt-mark hold libv4l-0 libv4l2rds0 libv4lconvert0 libv4l-dev v4l-utils
+# apt-mark hold libv4l-0 libv4l2rds0 libv4lconvert0 libv4l-dev v4l-utils
 #apt-mark hold librockchip-mpp1 librockchip-mpp-static librockchip-vpu0 rockchip-mpp-demos
-#apt-mark hold xserver-common xserver-xorg-core xserver-xorg-legacy
+apt-mark hold xserver-common xserver-xorg-core xserver-xorg-legacy
 apt-mark hold libegl-mesa0 libgbm1 libgles1 alsa-utils
 apt-get install -f -y
 
