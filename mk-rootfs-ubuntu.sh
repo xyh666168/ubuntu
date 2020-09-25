@@ -95,7 +95,7 @@ apt-get install -y isc-dhcp-client-ddns
 dpkg -i /packages/rga/*.deb
 
 echo -e "\033[36m Setup Video.................... \033[0m"
-apt-get install -y gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-alsa gstreamer1.0-plugins-base-apps qtmultimedia5-examples
+apt-get install -y gstreamer1.0-plugins-bad gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-alsa gstreamer1.0-plugins-base-apps qtmultimedia5-examples
 apt-get install -f -y
 
 dpkg -i  /packages/mpp/*
