@@ -87,13 +87,15 @@ apt-get update
 
 chmod +x /etc/rc.local
 
+apt-get install -y git fakeroot devscripts cmake vim qemu-user-static binfmt-support dh-make dh-exec pkg-kde-tools device-tree-compiler bc cpio parted dosfstools mtools libssl-dev g++-arm-linux-gnueabihf
+
 apt-get install -y isc-dhcp-client-ddns
 
 #---------------Rga--------------
 dpkg -i /packages/rga/*.deb
 
 echo -e "\033[36m Setup Video.................... \033[0m"
-apt-get install -y gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-alsa gstreamer1.0-plugins-base-apps
+apt-get install -y gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-alsa gstreamer1.0-plugins-base-apps qtmultimedia5-examples
 apt-get install -f -y
 
 dpkg -i  /packages/mpp/*
@@ -119,12 +121,14 @@ apt-get install -f -y
 apt-mark hold xserver-common xserver-xorg-core xserver-xorg-legacy
 
 #------------------ffmpeg------------
-#dpkg -i  /packages/ffmpeg/*.deb
-#apt-get install -f -y
+apt-get install -y ffmpeg
+dpkg -i  /packages/ffmpeg/*.deb
+apt-get install -f -y
 
 #------------------mpv------------
-#dpkg -i  /packages/mpv/*.deb
-#apt-get install -f -y
+apt-get install -y mpv
+dpkg -i  /packages/mpv/*.deb
+apt-get install -f -y
 
 #------------------libdrm------------
 dpkg -i  /packages/libdrm/*.deb
